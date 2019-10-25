@@ -2,9 +2,15 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
+import MusicIndex from '@/components/MusicIndex'
+
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/music',
+    component: MusicIndex
+  },
   {
     path: '/',
     name: 'home',
