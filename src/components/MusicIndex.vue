@@ -2,9 +2,9 @@
     <table class="table is-fullwidth is-striped is-hoverable is-narrow">
         <thead>
             <th id="artist"><a @click="changeSort('artist')">Artist</a><font-awesome-icon icon="chevron-up" v-if="sortBy == 'artist' && sortDirection == 'asc'"/><font-awesome-icon icon="chevron-down" v-if="sortBy == 'artist' && sortDirection == 'desc'"/></th>
-            <th id="title"><a @click="changeSort('title')">Title</a></th>
-            <th id="album"><a @click="changeSort('album')">Album</a></th>
-            <th id="genre"><a @click="changeSort('genra')">Genre</a></th>
+            <th id="title"><a @click="changeSort('title')">Title</a><font-awesome-icon icon="chevron-up" v-if="sortBy == 'title' && sortDirection == 'asc'"/><font-awesome-icon icon="chevron-down" v-if="sortBy == 'title' && sortDirection == 'desc'"/></th>
+            <th id="album"><a @click="changeSort('album')">Album</a><font-awesome-icon icon="chevron-up" v-if="sortBy == 'album' && sortDirection == 'asc'"/><font-awesome-icon icon="chevron-down" v-if="sortBy == 'album' && sortDirection == 'desc'"/></th>
+            <th id="genre"><a @click="changeSort('genre')">Genre</a><font-awesome-icon icon="chevron-up" v-if="sortBy == 'genre' && sortDirection == 'asc'"/><font-awesome-icon icon="chevron-down" v-if="sortBy == 'genre' && sortDirection == 'desc'"/></th>
         </thead>
 
         <tbody v-for="(song, index) in sortedSongs" :key="index">
