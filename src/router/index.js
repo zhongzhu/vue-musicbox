@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 import MusicIndex from '@/components/MusicIndex'
+import Playlist from '@/components/Playlists'
 
 Vue.use(VueRouter)
 
@@ -11,6 +12,10 @@ const routes = [
     path: '/music',
     component: MusicIndex
   },
+  {
+    path: '/music/playlist/:slug',
+    component: Playlist
+  },  
   {
     path: '/',
     name: 'home',

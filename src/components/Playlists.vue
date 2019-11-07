@@ -2,9 +2,15 @@
   <nav class="panel is-primary">
     <p class="panel-heading">Playlists</p>
 
+    <div class="panel-block">
+      <router-link to="/music">All songs</router-link>
+    </div>
+    
     <template v-for="playlist in playlists">
       <p class="panel-block" :key="playlist.slug">
-        <span class="panel-icon"><font-awesome-icon icon="book"/> </span> {{ playlist.name }}
+        <router-link :to="'music/playlist/' + playlist.slug">
+          <span class="panel-icon"><font-awesome-icon icon="book"/> </span> {{ playlist.name }}
+        </router-link>
       </p>
     </template>
 
@@ -44,18 +50,20 @@ export default {
         slug: this.slugify(this.newPlaylistName),
         songs: []
       })
+
+      this.newPlaylistName = ''
     },
     slugify (name) {
       return name.toString().toLowerCase().trim().replace(/\s+/g, '-').replace(/&/g, '-and-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')
-    },
-    created () {
-      localforage.getItem('playlists')
-      .then(data => {
-        if (data !== null) {
-          this.playlists = data
-        }
-      })
     }
+  },
+  created () {
+    localforage.getItem('playlists')
+    .then(data => {
+      if (data !== null) {
+        this.playlists = data
+      }
+    })
   }
 }
 </script>

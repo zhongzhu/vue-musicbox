@@ -6,10 +6,10 @@ import store from './store'
 import 'bulma/css/bulma.css'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronUp, faChevronDown, faBook, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faChevronUp,faChevronDown)
+library.add(faChevronUp, faChevronDown, faBook, faPlus)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
