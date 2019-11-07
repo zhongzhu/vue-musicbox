@@ -6,11 +6,16 @@
       <router-link to="/music">All songs</router-link>
     </div>
     
-    <template v-for="playlist in playlists">
+    <template v-for="(playlist, index) in playlists">
       <p class="panel-block" :key="playlist.slug">
         <router-link :to="'music/playlist/' + playlist.slug">
           <span class="panel-icon"><font-awesome-icon icon="book"/> </span> {{ playlist.name }}
         </router-link>
+
+        <template v-if="addingEnabled">
+          <div v-if="!playlist.adding" @click="add_songs(index)" title="Add songs"><font-awesome-icon icon="plus"/></div>
+          <div v-if="playlist.adding" @click="add_songs(index)" title="Disable adding songs"><font-awesome-icon icon="check-square"/></div>
+        </template>
       </p>
     </template>
 
@@ -29,6 +34,13 @@
 import localforage from 'localforage'
 
 export default {
+  props: {
+    addingEnabled: {
+      type: Boolean,
+      default: false,
+      required: false
+    }
+  },
   data () {
     return {
       newPlaylistName: '',
@@ -48,11 +60,15 @@ export default {
       this.playlists.push({
         name: this.newPlaylistName,
         slug: this.slugify(this.newPlaylistName),
+        adding: false,
         songs: []
       })
 
       this.newPlaylistName = ''
     },
+    add_songs (index) {
+      this.playlists[index].adding
+    },  
     slugify (name) {
       return name.toString().toLowerCase().trim().replace(/\s+/g, '-').replace(/&/g, '-and-').replace(/[^\w-]+/g, '').replace(/--+/g, '-')
     }
@@ -62,6 +78,10 @@ export default {
     .then(data => {
       if (data !== null) {
         this.playlists = data
+
+        this.playlists.forEach((pl, index) => {
+          this.playlists[index].adding = false
+        })
       }
     })
   }
