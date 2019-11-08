@@ -1,28 +1,26 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
-      <router-link to="/music">Music</router-link>
-    </div>
+  <div id="app" class="container">
     <router-view/>
   </div>
 </template>
 
+<script>
+export default {
+  name: 'App'
+}
+</script>
+
 <style>
-#app {
+table td {
+  word-break: break-word;
 }
 
-#nav {
-  padding: 30px;
+@keyframes flash {
+  from {background-color: green}
+  to {background-color: inherit}
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.flash {
+  animation: flash 1s 1;
 }
 </style>

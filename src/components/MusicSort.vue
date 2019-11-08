@@ -1,24 +1,24 @@
 <template>
   <thead>
-    <th id="artist">
+    <th style="width: 30%">
       <a @click="changeSort('artist')">Artist</a>
-      <font-awesome-icon icon="chevron-up" v-if="sortBy == 'artist' && sortDirection == 'asc'" />
-      <font-awesome-icon icon="chevron-down" v-if="sortBy == 'artist' && sortDirection == 'desc'" />
+      <fa-icon icon="chevron-up" v-if="sortBy == 'artist' && sortDirection == 'asc'" />
+      <fa-icon icon="chevron-down" v-if="sortBy == 'artist' && sortDirection == 'desc'" />
     </th>
-    <th id="title">
+    <th style="width: 30%">
       <a @click="changeSort('title')">Title</a>
-      <font-awesome-icon icon="chevron-up" v-if="sortBy == 'title' && sortDirection == 'asc'" />
-      <font-awesome-icon icon="chevron-down" v-if="sortBy == 'title' && sortDirection == 'desc'" />
+      <fa-icon icon="chevron-up" v-if="sortBy == 'title' && sortDirection == 'asc'" />
+      <fa-icon icon="chevron-down" v-if="sortBy == 'title' && sortDirection == 'desc'" />
     </th>
-    <th id="album">
+    <th style="width: 20%">
       <a @click="changeSort('album')">Album</a>
-      <font-awesome-icon icon="chevron-up" v-if="sortBy == 'album' && sortDirection == 'asc'" />
-      <font-awesome-icon icon="chevron-down" v-if="sortBy == 'album' && sortDirection == 'desc'" />
+      <fa-icon icon="chevron-up" v-if="sortBy == 'album' && sortDirection == 'asc'" />
+      <fa-icon icon="chevron-down" v-if="sortBy == 'album' && sortDirection == 'desc'" />
     </th>
-    <th id="genre">
+    <th style="width: 20%">
       <a @click="changeSort('genre')">Genre</a>
-      <font-awesome-icon icon="chevron-up" v-if="sortBy == 'genre' && sortDirection == 'asc'" />
-      <font-awesome-icon icon="chevron-down" v-if="sortBy == 'genre' && sortDirection == 'desc'" />
+      <fa-icon icon="chevron-up" v-if="sortBy == 'genre' && sortDirection == 'asc'" />
+      <fa-icon icon="chevron-down" v-if="sortBy == 'genre' && sortDirection == 'desc'" />
     </th>
   </thead>
 </template>
@@ -37,17 +37,27 @@ export default {
       sortDirection: "asc"
     };
   },
+  watch: {
+    songs () {
+      this.sort_songs()
+    }
+  },
   methods: {
     changeSort(columnName) {
-      this.sortBy = columnName;
-      this.sortDirection = this.sortDirection === "asc" ? "desc" : "asc";
-      this.sort_songs();
+      if (this.sortBy === columnName && this.sortDirection === 'asc') {
+        this.sortDirection = 'desc'
+      } else {
+        this.sortDirection = 'asc'
+      }
+      this.sortBy = columnName
+
+      this.sort_songs()
     },
     sort_songs() {
       if (this.sortBy === "") {
         this.$emit("sortedSongs", this.songs);
       } else {
-        let sortModifier = this.sortDirection === "asc" ? 1 : -1;
+        let sortModifier = (this.sortDirection === "asc") ? 1 : -1;
 
         let sortedSongs = this.songs.slice().sort((a, b) => {
           let colA = a[this.sortBy].toUpperCase();
@@ -70,19 +80,4 @@ export default {
 </script>
 
 <style>
-#artist {
-  width: 30%;
-}
-
-#title {
-  width: 30%;
-}
-
-#album {
-  width: 30%;
-}
-
-#genre {
-  width: 20%;
-}
 </style>
