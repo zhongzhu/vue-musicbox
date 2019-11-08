@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+
 import MusicIndex from '@/components/MusicIndex'
 import Playlist from '@/components/Playlists'
 
