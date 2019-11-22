@@ -51,7 +51,7 @@ export default {
       default: false,
       required: false
     },
-    selectedPlaylistsSlug: {
+    selectedPlaylistSlug: {
       type: String,
       required: false
     }
@@ -69,7 +69,7 @@ export default {
       },
       deep: true
     },
-    selectedPlaylistsSlug(slug) {
+    selectedPlaylistSlug(slug) {
       this.$emit("setPlaylist", this.playlists.find(pl => pl.slug === slug));
     }
   },
@@ -116,10 +116,10 @@ export default {
         }
       })
       .then(() => {
-        if (this.selectedPlaylistsSlug !== undefined) {
+        if (this.selectedPlaylistSlug !== undefined) {
           this.$emit(
             "setPlaylist",
-            this.playlists.find(pl => pl.slug === this.selectedPlaylistsSlug)
+            this.playlists.find(pl => pl.slug === this.selectedPlaylistSlug)
           );
         }
       });

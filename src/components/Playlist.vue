@@ -34,7 +34,17 @@ export default {
   methods: {
     sort_songs (data) {
       this.sortedSongs = data
+    },
+    set_playlist (playlist) {
+      this.selectedPlaylist = playlist
+      this.songs = playlist.songs
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    console.log('playlist.vue called beforeRouteUpdate')
+    this.selectedPlaylistSlug = to.params.slug
+
+    next()
   }
 };
 </script>
