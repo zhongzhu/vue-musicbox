@@ -6,6 +6,7 @@
             <td><slot name="add_title" :song="song"></slot>{{ song.title }}</td>
             <td>{{ song.album }}</td>
             <td>{{ song.genre }}</td>
+            <td><slot name="custom_column" :song="song"></slot></td>
         </tr>
       </template>
     </tbody>

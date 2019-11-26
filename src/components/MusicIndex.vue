@@ -1,7 +1,7 @@
 <template>
   <div class="columns">
     <div class="column is-3">
-      <playlists addingEnabled @setActivePlaylists="set_active_playlists" />
+      <playlists addingEnabled @setActivePlayLists="set_active_playlists" />
     </div>
     <div class="column is-9">
       <table class="table is-fullwidth is-striped is-hoverable is-narrow">

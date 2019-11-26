@@ -6,7 +6,14 @@
     <div class="column is-9">
       <table class="table is-fullwidth is-striped is-hoverable is-narrow">
         <sorted :songs="songs" @sortedSongs="sort_songs"/>
-        <paginated :items="sortedSongs" />
+
+        <paginated :items="sortedSongs">
+          <template slot="custom_column" slot-scope="songList">
+            <a @click="delete_song(songList.song)" class="button is-small is-danger">
+              <fa-icon icon="trash"/>
+            </a>
+          </template>
+        </paginated>
       </table>
     </div>
   </div>
@@ -38,6 +45,9 @@ export default {
     set_playlist (playlist) {
       this.selectedPlaylist = playlist
       this.songs = playlist.songs
+    },
+    delete_song (song) {
+      this.selectedPlaylist.songs.splice(this.selectedPlaylist.songs.indexOf(song), 1)
     }
   },
   beforeRouteUpdate(to, from, next) {

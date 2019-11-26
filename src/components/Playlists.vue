@@ -7,23 +7,44 @@
     <p class="panel-heading">Playlists</p>
 
     <template v-for="(playlist, index) in playlists">
-      <p class="panel-block playlist-item" :key="playlist.slug">
-        <router-link :to="'/playlist/' + playlist.slug" class="planel-block">
+      <div class="panel-block playlist-item" :key="playlist.slug">
+        <router-link v-if="!playlist.editing" :to="'/playlist/' + playlist.slug" class="planel-block">
           <span class="panel-icon">
             <fa-icon icon="book" />
           </span>
           {{ playlist.name }}
         </router-link>
+        
+        <form class="planel-block" v-if="playlist.editing" @submit.prevent="edit_playlist(index)">
+          <div class="field has-addons">
+            <input type="text" v-model="playlist.name" class="input">
+            <p class="control"><button type="submit" class="button is-success"><fa-icon icon="check" /></button></p>
+          </div>
+        </form>
 
-        <template v-if="addingEnabled">
-          <a v-if="!playlist.adding" @click="add_songs(index)" title="Add songs">
-            <fa-icon icon="plus" />
-          </a>
-          <a v-else @click="add_songs(index)" title="Disable adding songs">
-            <fa-icon icon="check-square" />
-          </a>
-        </template>
-      </p>
+        <div>
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <a aria-haspopup="true" aria-controls="dropdown-menu"><fa-icon icon="chevron-down" /></a>
+            </div>
+
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <a class="dropdown-item" title="Rename playlist" @click="edit_playlist(index)"><fa-icon icon="edit" /> Rename</a>
+                <a class="dropdown-item" title="Delete playlist" @click="delete_playlist(index)"><fa-icon icon="trash-alt" /> Delete</a>                
+              </div>
+            </div>
+          </div>
+          <template v-if="addingEnabled">
+            <a v-if="!playlist.adding" @click="add_songs(index)" title="Add songs">
+              <fa-icon icon="plus" />
+            </a>
+            <a v-else @click="add_songs(index)" title="Disable adding songs">
+              <fa-icon icon="check-square" />
+            </a>
+          </template>
+        </div>
+      </div>
     </template>
 
     <div class="panel-block">
@@ -79,6 +100,7 @@ export default {
         name: this.newPlaylistName,
         slug: this.slugify(this.newPlaylistName),
         adding: false,
+        editing: false,
         songs: []
       });
 
@@ -91,6 +113,12 @@ export default {
         "setActivePlayLists",
         this.playlists.filter(pl => pl.adding === true)
       );
+    },
+    delete_playlist (index) {
+      this.playlists.splice(index, 1)
+    },
+    edit_playlist (index) {
+      this.playlists[index].editing = !this.playlists[index].editing
     },
     slugify(name) {
       return name
@@ -111,7 +139,8 @@ export default {
           this.playlists = data;
 
           this.playlists.forEach((pl, index) => {
-            this.playlists[index].adding = false;
+            this.playlists[index].adding = false
+            this.playlists[index].editing = false
           });
         }
       })
