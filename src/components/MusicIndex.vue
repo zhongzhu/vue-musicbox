@@ -4,8 +4,10 @@
       <playlists addingEnabled @setActivePlayLists="set_active_playlists" />
     </div>
     <div class="column is-9">
+      <search :songs="songs" @filteredSongs="filter_songs" />
+
       <table class="table is-fullwidth is-striped is-hoverable is-narrow">
-        <sorted :songs="songs" @sortedSongs="sort_songs"/>
+        <sorted :songs="filteredSongs" @sortedSongs="sort_songs"/>
         
         <paginated :items="sortedSongs">
           <template slot="add_title" slot-scope="songList" v-if="activePlaylists.length > 0">
@@ -19,12 +21,14 @@
 
 <script>
 import MusicData from "@/assets/list.json"
+import MusicSearch from '@/components/MusicSearch'
 import PaginatedTableBody from "@/components/PaginatedTableBody"
 import MusicSort from '@/components/MusicSort'
 import Playlists from '@/components/Playlists'
 
 export default {
   components: {
+    'search': MusicSearch,
     'sorted': MusicSort,
     'paginated': PaginatedTableBody,
     'playlists': Playlists
@@ -33,10 +37,14 @@ export default {
     return {
       songs: MusicData,
       sortedSongs: MusicData,
+      filteredSongs: MusicData,
       activePlaylists: []
     };
   },
   methods: {
+    filter_songs (data) {
+      this.filteredSongs = data
+    },
     sort_songs (data) {
       this.sortedSongs = data
     },
