@@ -1,25 +1,27 @@
 <template>
   <thead>
-    <th style="width: 30%">
-      <a @click="changeSort('artist')">Artist</a>
-      <fa-icon icon="chevron-up" v-if="sortBy == 'artist' && sortDirection == 'asc'" />
-      <fa-icon icon="chevron-down" v-if="sortBy == 'artist' && sortDirection == 'desc'" />
-    </th>
-    <th style="width: 30%">
-      <a @click="changeSort('title')">Title</a>
-      <fa-icon icon="chevron-up" v-if="sortBy == 'title' && sortDirection == 'asc'" />
-      <fa-icon icon="chevron-down" v-if="sortBy == 'title' && sortDirection == 'desc'" />
-    </th>
-    <th style="width: 20%">
-      <a @click="changeSort('album')">Album</a>
-      <fa-icon icon="chevron-up" v-if="sortBy == 'album' && sortDirection == 'asc'" />
-      <fa-icon icon="chevron-down" v-if="sortBy == 'album' && sortDirection == 'desc'" />
-    </th>
-    <th style="width: 20%">
-      <a @click="changeSort('genre')">Genre</a>
-      <fa-icon icon="chevron-up" v-if="sortBy == 'genre' && sortDirection == 'asc'" />
-      <fa-icon icon="chevron-down" v-if="sortBy == 'genre' && sortDirection == 'desc'" />
-    </th>
+    <tr>
+      <th style="width: 30%">
+        <a @click="changeSort('artist')">Artist</a>
+        <fa-icon icon="chevron-up" v-if="sortBy == 'artist' && sortDirection == 'asc'" />
+        <fa-icon icon="chevron-down" v-if="sortBy == 'artist' && sortDirection == 'desc'" />
+      </th>
+      <th style="width: 30%">
+        <a @click="changeSort('title')">Title</a>
+        <fa-icon icon="chevron-up" v-if="sortBy == 'title' && sortDirection == 'asc'" />
+        <fa-icon icon="chevron-down" v-if="sortBy == 'title' && sortDirection == 'desc'" />
+      </th>
+      <th style="width: 20%">
+        <a @click="changeSort('album')">Album</a>
+        <fa-icon icon="chevron-up" v-if="sortBy == 'album' && sortDirection == 'asc'" />
+        <fa-icon icon="chevron-down" v-if="sortBy == 'album' && sortDirection == 'desc'" />
+      </th>
+      <th style="width: 20%">
+        <a @click="changeSort('genre')">Genre</a>
+        <fa-icon icon="chevron-up" v-if="sortBy == 'genre' && sortDirection == 'asc'" />
+        <fa-icon icon="chevron-down" v-if="sortBy == 'genre' && sortDirection == 'desc'" />
+      </th>
+    </tr>
   </thead>
 </template>
 
@@ -79,5 +81,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

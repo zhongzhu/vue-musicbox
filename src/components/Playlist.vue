@@ -51,7 +51,6 @@ export default {
     }
   },
   beforeRouteUpdate(to, from, next) {
-    console.log('playlist.vue called beforeRouteUpdate')
     this.selectedPlaylistSlug = to.params.slug
 
     next()

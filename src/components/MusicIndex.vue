@@ -10,7 +10,7 @@
         <sorted :songs="filteredSongs" @sortedSongs="sort_songs"/>
         
         <paginated :items="sortedSongs">
-          <template slot="add_title" slot-scope="songList" v-if="activePlaylists.length > 0">
+          <template v-slot:add_title="songList" v-if="activePlaylists.length > 0">
             <a @click="add_song(songList.song, $event.target)"><fa-icon icon="plus"/></a>
           </template>
         </paginated>
