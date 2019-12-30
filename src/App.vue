@@ -11,16 +11,7 @@ export default {
 </script>
 
 <style>
-table td {
+/* table td {
   word-break: break-word;
-}
-
-@keyframes flash {
-  from {background-color: green}
-  to {background-color: inherit}
-}
-
-.flash {
-  animation: flash 1s 1;
-}
+} */
 </style>

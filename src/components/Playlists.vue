@@ -1,24 +1,24 @@
 <template>
   <nav class="panel is-primary">
-    <a class="panel-block">
-      <router-link to="/">All songs</router-link>
-    </a>
-
     <p class="panel-heading">Playlists</p>
+    
+    <a class="panel-block"><router-link to="/">All songs</router-link></a>
 
     <template v-for="(playlist, index) in playlists">
       <div class="panel-block playlist-item" :key="playlist.slug">
         <router-link v-if="!playlist.editing" :to="'/playlist/' + playlist.slug" class="planel-block">
-          <span class="panel-icon">
-            <fa-icon icon="book" />
-          </span>
+          <span class="panel-icon"><fa-icon icon="book" /></span>
           {{ playlist.name }}
         </router-link>
         
         <form class="planel-block" v-if="playlist.editing" @submit.prevent="edit_playlist(index)">
           <div class="field has-addons">
-            <input type="text" v-model="playlist.name" class="input">
-            <p class="control"><button type="submit" class="button is-success"><fa-icon icon="check" /></button></p>
+            <div class="control">
+              <input type="text" v-model="playlist.name" class="input">
+            </div>
+            <div class="control">
+              <button type="submit" class="button is-success"><fa-icon icon="check" /></button>
+            </div>
           </div>
         </form>
 
@@ -35,6 +35,7 @@
               </div>
             </div>
           </div>
+         
           <template v-if="addingEnabled">
             <a v-if="!playlist.adding" @click="add_songs(index)" title="Add songs">
               <fa-icon icon="plus" />
@@ -44,21 +45,23 @@
             </a>
           </template>
         </div>
+
       </div>
     </template>
 
     <div class="panel-block">
       <form @submit.prevent="add_playlist">
         <div class="field has-addons">
-          <input type="text" class="input" placeholder="New playlist" v-model="newPlaylistName" />
-          <p class="control">
-            <button type="submit" class="button is-success">
-              <fa-icon icon="plus" />Add
-            </button>
-          </p>
+          <div class="control">
+            <input type="text" class="input" placeholder="New playlist" v-model="newPlaylistName" />
+          </div>
+          <div class="control">
+            <button type="submit" class="button is-success"><fa-icon icon="plus" />Add</button>
+          </div>
         </div>
       </form>
     </div>
+
   </nav>
 </template>
 
@@ -157,11 +160,6 @@ export default {
 </script>
 
 <style scoped>
-/* nav {
-  position: fixed;
-  width: inherit;
-} */
-
 .playlist-item {
   justify-content: space-between;
 }

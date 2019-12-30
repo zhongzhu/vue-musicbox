@@ -56,4 +56,12 @@ export default {
 
 <style scoped>
 
+@keyframes flash {
+  from {background-color: green}
+  to {background-color: inherit}
+}
+
+.flash {
+  animation: flash 1s 1;
+}
 </style>
